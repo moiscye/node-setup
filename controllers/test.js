@@ -1,3 +1,3 @@
 exports.test = async (req, res) => {
-  res.json({ user: "Your name" });
+  res.send("Setup successful");
 };
