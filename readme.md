@@ -51,10 +51,12 @@ If you need to update `npm`, you can make it using `npm`! Cool right? After runn
 
 In the /config folder create a file dev.js with the following (You only need either local or cloud)
 
+```javascript
 module.exports = {
-mongoURI: "mongodb://localhost/your_db" <<< local DB
-mongoURI: "your_cloud_string" <<< MongoDB Atlas
+mongoURI: "mongodb://localhost/your_db" // local DB
+mongoURI: "your_cloud_string" // MongoDB Atlas
 };
+```
 
 The dev.js file is not in the repo because its being blacklisted in the .gitignore file
 
@@ -74,36 +76,39 @@ Setup successful
 
 - create a file auth.js in the folder /routes with the following
 
-  const express = require("express");
-  const router = express.Router();
-  const { signin, signup, signout } = require("../controllers/auth");
-  router.get("/signup", signup);
-  router.get("/signin", signin);
-  router.get("/signout", signout);
-  module.exports = router;
+```javascript
+const express = require("express");
+const router = express.Router();
+const { signin, signup, signout } = require("../controllers/auth");
+router.get("/signup", signup);
+router.get("/signin", signin);
+router.get("/signout", signout);
+module.exports = router;
+```
 
-* create a file auth.js in the folder /controllers with the following
+- create a file auth.js in the folder /controllers with the following
 
-  exports.signup = async (req, res) => {
+```javascript
+exports.signup = async (req, res) => {
   //all logic goes here
   res.send("Signing up...");
-  };
-  exports.signin = async (req, res) => {
+};
+exports.signin = async (req, res) => {
   //all logic goes here
   res.send("Signing in...");
-  };
-  exports.signout = async (req, res) => {
+};
+exports.signout = async (req, res) => {
   //all logic goes here
   res.send("Signing out...");
-  };
+};
+```
 
-* in the file routes.js inside folder /startup add the following below import routes
+- in the file routes.js inside folder /startup add the following below import routes
 
-  const authRoutes = require("../routes/auth");
+        const authRoutes = require("../routes/auth");
 
-* and also add this line below routes middleware
-    
-   app.use("/api", authRoutes);
+- and also add this line below routes middleware
+        app.use("/api", authRoutes);
 
 ## Accesing the end point once again. Now we have three new routes
 
