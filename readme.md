@@ -108,6 +108,7 @@ exports.signout = async (req, res) => {
         const authRoutes = require("../routes/auth");
 
 - and also add this line below routes middleware
+
         app.use("/api", authRoutes);
 
 ## Accesing the end point once again. Now we have three new routes
