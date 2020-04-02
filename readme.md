@@ -119,4 +119,48 @@ exports.signout = async (req, res) => {
 
 you should see a message according the page.
 
+## Installing React
+
+        $ npx create-react-app client
+        $ cd client
+        $ npm start
+
+At this point your default browser will open a page pointing to http://localhost:3000 and you will be able to see the default welcome page of react. In case your browser doesn't open the page, open your preferred browser and navigate yourself to http://localhost:3000
+
+Next lets install a proxy middleware to facilitate communication with the back end
+
+Make sure you are in /client folder, type the following
+
+        $ npm install http-proxy-middleware
+
+Then create a file setupProxy.js in /client/src with the following code
+
+```javascript
+const proxy = require("http-proxy-middleware");
+
+module.exports = function(app) {
+  app.use(proxy("/api/", { target: "http://localhost:8000" }));
+};
+```
+
+if you are using the version 1.0.0 or newer use the following
+
+```javascript
+const { createProxyMiddleware } = require("http-proxy-middleware");
+
+module.exports = function(app) {
+  app.use(createProxyMiddleware("/api/", { target: "http://localhost:8000" }));
+};
+```
+
+with this setup, anytime you need to refer to your backend you will only need to type the following(you need to install axios in the /client folder or just use fetch instead)
+
+        const res = await axios.get("api/signin");
+
+instead of
+
+        const res = await axios.get("http://localhost:8000/api/signin");
+
+At this point you React app should be up and running!
+
 Disclaimer: This configuration is better suited for large projects, however, in small projects, it keeps the code well-organized.
